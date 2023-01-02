@@ -1,10 +1,14 @@
-package deal
+package gocheapshark
 
 import (
 	"time"
 )
 
-type ListOpts struct {
+func (c Client) DealList(opts DealListOpts) (*DealListResponse, error) {
+	return nil, nil
+}
+
+type DealListOpts struct {
 	AAA         *bool   `json:"AAA"`
 	Desc        *string `json:"desc"`
 	Exact       *bool   `json:"exact"`
@@ -23,11 +27,11 @@ type ListOpts struct {
 	UpperPrice  *uint   `json:"upperPrice"`
 }
 
-type ListResponse struct {
-	Data []*Response
+type DealListResponse struct {
+	Data []*DealResponse
 }
 
-type Response struct {
+type DealResponse struct {
 	DealID             string    `json:"dealID"`
 	DealRating         string    `json:"dealRating"`
 	GameID             string    `json:"gameID"`
