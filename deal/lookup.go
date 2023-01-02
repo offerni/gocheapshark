@@ -1,10 +1,10 @@
 package deal
 
-type DealLookupOpts struct {
+type LookupOpts struct {
 }
 
-type DealLookupRequest struct {
+type LookupRequest struct {
 }
 
-type DealLookupResponse struct {
+type LookupResponse struct {
 }

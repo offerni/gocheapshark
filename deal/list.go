@@ -1,10 +1,10 @@
 package deal
 
-type DealListOpts struct {
+type ListOpts struct {
 }
 
-type DealListRequest struct {
+type ListRequest struct {
 }
 
-type DealListResponse struct {
+type ListResponse struct {
 }
