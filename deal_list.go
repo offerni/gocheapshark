@@ -1,10 +1,20 @@
 package gocheapshark
 
 import (
+	"net/http"
 	"time"
 )
 
 func (c Client) DealList(opts DealListOpts) (*DealListResponse, error) {
+
+	resp, err := c.call(callOpts{
+		Method: http.MethodGet,
+		URL:    c.BaseURL,
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	return nil, nil
 }
 
