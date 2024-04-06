@@ -2,7 +2,7 @@ package gocheapshark
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
@@ -30,9 +30,9 @@ func (c *Client) call(opts callOpts) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}
