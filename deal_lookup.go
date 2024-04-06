@@ -9,6 +9,10 @@ import (
 )
 
 func (c Client) DealLookup(opts DealLookupOpts) (*DealLookupResponse, error) {
+	if err := opts.validate(); err != nil {
+		return nil, err
+	}
+
 	jsonResp, err := c.call(callOpts{
 		Method: http.MethodGet,
 		URL:    fmt.Sprintf("%s/%s?id=%s", c.BaseURL, DealsAPIPath, opts.ID),
@@ -30,7 +34,7 @@ func (c Client) DealLookup(opts DealLookupOpts) (*DealLookupResponse, error) {
 }
 
 func (opts DealLookupOpts) validate() error {
-	if opts.ID != "" {
+	if opts.ID == "" {
 		return ErrNoID
 	}
 

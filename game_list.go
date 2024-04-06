@@ -10,6 +10,10 @@ import (
 )
 
 func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
+	if err := opts.validate(); err != nil {
+		return nil, err
+	}
+
 	params := utils.BuildQueryParams(opts)
 
 	jsonResp, err := c.call(callOpts{
@@ -28,6 +32,14 @@ func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
 	return &GameListResponse{
 		Data: games,
 	}, nil
+}
+
+func (opts GameListOpts) validate() error {
+	if opts.Title == "" {
+		return ErrNoGameTitle
+	}
+
+	return nil
 }
 
 type GameListOpts struct {

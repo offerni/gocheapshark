@@ -9,6 +9,10 @@ import (
 )
 
 func (c Client) GameLookup(opts GameLookupOpts) (*GameLookupResponse, error) {
+	if err := opts.validate(); err != nil {
+		return nil, err
+	}
+
 	jsonResp, err := c.call(callOpts{
 		Method: http.MethodGet,
 		URL:    fmt.Sprintf("%s/%s?id=%d", c.BaseURL, GamesAPIPath, opts.ID),
@@ -30,7 +34,7 @@ func (c Client) GameLookup(opts GameLookupOpts) (*GameLookupResponse, error) {
 }
 
 func (opts GameLookupOpts) validate() error {
-	if opts.ID != 0 {
+	if opts.ID == 0 {
 		return ErrNoID
 	}
 

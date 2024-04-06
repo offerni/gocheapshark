@@ -31,3 +31,13 @@ func BuildQueryParams[T comparable](opts T) string {
 
 	return v.Encode()
 }
+
+func ConvertNumericStringToUintPointer(s string) (*uint, error) {
+	uint64Value, err := strconv.ParseUint(s, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	uintValue := uint(uint64Value)
+	return &uintValue, nil
+}
