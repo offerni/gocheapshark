@@ -4,4 +4,5 @@ import "errors"
 
 var (
 	ErrNoBaseURL = errors.New("Base URL is required")
+	ErrNoID      = errors.New("ID is required")
 )
