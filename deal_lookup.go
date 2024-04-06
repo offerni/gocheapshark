@@ -24,7 +24,7 @@ func (c Client) DealLookup(opts DealLookupOpts) (*DealLookupResponse, error) {
 
 	// Adding the requested ID back to the payload for consistency since it's not
 	// returned by default
-	deal.GameInfo.DealID = opts.ID
+	deal.GameInfo.DealID = &opts.ID
 
 	return &deal, nil
 }
@@ -48,22 +48,22 @@ type DealLookupResponse struct {
 }
 
 type GameInfo struct {
-	DealID             string `json:"dealID"`
-	GameID             string `json:"gameID"`
-	MetacriticLink     string `json:"metacriticLink"`
-	MetacriticScore    string `json:"metacriticScore"`
-	Name               string `json:"name"`
-	Publisher          string `json:"publisher"`
-	ReleaseDate        int64  `json:"releaseDate"`
-	RetailPrice        string `json:"retailPrice"`
-	SalePrice          string `json:"salePrice"`
-	SteamAppID         string `json:"steamAppID"`
-	SteamRatingCount   string `json:"steamRatingCount"`
-	SteamRatingPercent string `json:"steamRatingPercent"`
-	SteamRatingText    string `json:"steamRatingText"`
-	Steamworks         string `json:"steamworks"`
-	StoreID            string `json:"storeID"`
-	Thumb              string `json:"thumb"`
+	DealID             *string `json:"dealID"`
+	GameID             *string `json:"gameID"`
+	MetacriticLink     *string `json:"metacriticLink"`
+	MetacriticScore    *string `json:"metacriticScore"`
+	Name               *string `json:"name"`
+	Publisher          *string `json:"publisher"`
+	ReleaseDate        *int64  `json:"releaseDate"`
+	RetailPrice        *string `json:"retailPrice"`
+	SalePrice          *string `json:"salePrice"`
+	SteamAppID         *string `json:"steamAppID"`
+	SteamRatingCount   *string `json:"steamRatingCount"`
+	SteamRatingPercent *string `json:"steamRatingPercent"`
+	SteamRatingText    *string `json:"steamRatingText"`
+	Steamworks         *string `json:"steamworks"`
+	StoreID            *string `json:"storeID"`
+	Thumb              *string `json:"thumb"`
 }
 
 type CheaperStore struct {

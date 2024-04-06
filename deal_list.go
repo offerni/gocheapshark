@@ -54,23 +54,23 @@ type DealListResponse struct {
 }
 
 type DealFetchResponse struct {
-	DealID             string `json:"dealID"`
-	DealRating         string `json:"dealRating"`
-	GameID             string `json:"gameID"`
-	InternalName       string `json:"internalName"`
-	IsOnSale           string `json:"isOnSale"`
-	LastChange         int64  `json:"lastChange"`
-	MetacriticLink     string `json:"metacriticLink"`
-	MetacriticScore    string `json:"metacriticScore"`
-	NormalPrice        string `json:"normalPrice"`
-	ReleaseDate        int64  `json:"releaseDate"`
-	SalePrice          string `json:"salePrice"`
-	Savings            string `json:"savings"`
-	SteamAppID         string `json:"steamAppID"`
-	SteamRatingCount   string `json:"steamRatingCount"`
-	SteamRatingPercent string `json:"steamRatingPercent"`
-	SteamRatingText    string `json:"steamRatingText"`
-	StoreID            string `json:"storeID"`
-	Thumb              string `json:"thumb"`
-	Title              string `json:"title"`
+	DealID             *string `json:"dealID"`
+	DealRating         *string `json:"dealRating"`
+	GameID             *string `json:"gameID"`
+	InternalName       *string `json:"internalName"`
+	IsOnSale           *string `json:"isOnSale"`
+	LastChange         *int64  `json:"lastChange"`
+	MetacriticLink     *string `json:"metacriticLink"`
+	MetacriticScore    *string `json:"metacriticScore"`
+	NormalPrice        *string `json:"normalPrice"`
+	ReleaseDate        *int64  `json:"releaseDate"`
+	SalePrice          *string `json:"salePrice"`
+	Savings            *string `json:"savings"`
+	SteamAppID         *string `json:"steamAppID"`
+	SteamRatingCount   *string `json:"steamRatingCount"`
+	SteamRatingPercent *string `json:"steamRatingPercent"`
+	SteamRatingText    *string `json:"steamRatingText"`
+	StoreID            *string `json:"storeID"`
+	Thumb              *string `json:"thumb"`
+	Title              *string `json:"title"`
 }

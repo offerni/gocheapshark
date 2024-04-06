@@ -1,10 +1,52 @@
 package gocheapshark
 
-type GameListOpts struct {
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/offerni/go-cheap-shark/errutils"
+	"github.com/offerni/go-cheap-shark/utils"
+)
+
+func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
+	params := utils.BuildQueryParams(opts)
+
+	jsonResp, err := c.call(callOpts{
+		Method: http.MethodGet,
+		URL:    fmt.Sprintf("%s/%s?%s", c.BaseURL, GamesAPIPath, params),
+	})
+	if err != nil {
+		return nil, errutils.Wrap("c.call", err)
+	}
+
+	var games []*GameFetchResponse
+	if err := json.Unmarshal(jsonResp, &games); err != nil {
+		return nil, errutils.Wrap("json.Unmarshal(jsonResp, &games)", err)
+	}
+
+	return &GameListResponse{
+		Data: games,
+	}, nil
 }
 
-type GameListRequest struct {
+type GameListOpts struct {
+	Title      string `json:"title"`
+	SteamAppID *uint  `json:"steamAppID"`
+	Limit      *uint  `json:"limit"`
+	Exact      *bool  `json:"exact"`
 }
 
 type GameListResponse struct {
+	Data []*GameFetchResponse `json:"data"`
+}
+
+type GameFetchResponse struct {
+	GameID         *string `json:"gameID"`
+	SteamAppID     *string `json:"steamAppID"`
+	Cheapest       *string `json:"cheapest"`
+	CheapestDealID *string `json:"cheapestDealID"`
+	External       *string `json:"external"`
+	InternalName   *string `json:"internalName"`
+	Thumb          *string `json:"thumb"`
 }
