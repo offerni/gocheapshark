@@ -19,7 +19,11 @@ func BuildQueryParams[T comparable](opts T) string {
 			var valueStr string
 			switch fieldValue.Elem().Kind() {
 			case reflect.Bool:
-				valueStr = strconv.FormatBool(fieldValue.Elem().Bool())
+				if fieldValue.Elem().Bool() {
+					valueStr = "1"
+				} else {
+					valueStr = "0"
+				}
 			case reflect.Uint:
 				valueStr = strconv.FormatUint(fieldValue.Elem().Uint(), 10)
 			case reflect.String:
