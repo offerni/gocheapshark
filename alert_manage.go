@@ -8,7 +8,7 @@ import (
 	"github.com/offerni/go-cheap-shark/errutils"
 )
 
-func (c Client) AlertEdit(opts AlertEditOpts) (*bool, error) {
+func (c Client) AlertManage(opts AlertManageOpts) (*string, error) {
 	if err := opts.validate(); err != nil {
 		return nil, err
 	}
@@ -19,19 +19,23 @@ func (c Client) AlertEdit(opts AlertEditOpts) (*bool, error) {
 
 	jsonResp, err := c.call(callOpts{
 		Method: http.MethodGet,
-		URL: fmt.Sprintf("%s/%s?action=%s&email=%s&gameID=%d&price=%.2f",
+		URL: fmt.Sprintf("%s/%s?action=%s&email=%s",
 			c.BaseURL,
 			AlertsAPIPath,
 			opts.Action,
 			opts.Email,
-			opts.GameID,
-			opts.Price,
-		)}) // yeah, I know... I was a little lazy on this one (ﾉ˚Д˚)ﾉ
+		)}) // again... too lazy (ﾉ˚Д˚)ﾉ
 	if err != nil {
 		return nil, errutils.Wrap("c.call", err)
 	}
 
-	var result bool
+	respStr := string(jsonResp)
+
+	if !json.Valid(jsonResp) {
+		return &respStr, nil
+	}
+
+	var result string
 	err = json.Unmarshal(jsonResp, &result)
 	if err != nil {
 		return nil, err
@@ -40,7 +44,7 @@ func (c Client) AlertEdit(opts AlertEditOpts) (*bool, error) {
 	return &result, nil
 }
 
-func (opts AlertEditOpts) validate() error {
+func (opts AlertManageOpts) validate() error {
 	if opts.Action == "" {
 		return ErrNoAction
 	}
@@ -49,16 +53,10 @@ func (opts AlertEditOpts) validate() error {
 		return ErrNoEmail
 	}
 
-	if opts.GameID == 0 {
-		return ErrNoID
-	}
-
 	return nil
 }
 
-type AlertEditOpts struct {
-	Action string  `json:"action"`
-	Email  string  `json:"email"`
-	GameID uint    `json:"gameID"`
-	Price  float64 `json:"price"`
+type AlertManageOpts struct {
+	Action string `json:"action"`
+	Email  string `json:"email"`
 }
