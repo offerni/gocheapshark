@@ -1,6 +1,7 @@
 package gocheapshark
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -31,7 +32,16 @@ func (c Client) AlertEdit(opts AlertEditOpts) (*bool, error) {
 		return nil, errutils.Wrap("c.call", err)
 	}
 
+	if !json.Valid(jsonResp) {
+		return nil, fmt.Errorf("%s", jsonResp)
+	}
+
 	var result bool
+
+	if bytes.Equal(jsonResp, []byte("[]")) {
+		return &result, nil
+	}
+
 	err = json.Unmarshal(jsonResp, &result)
 	if err != nil {
 		return nil, err

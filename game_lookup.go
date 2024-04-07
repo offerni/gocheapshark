@@ -1,6 +1,7 @@
 package gocheapshark
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -19,6 +20,14 @@ func (c Client) GameLookup(opts GameLookupOpts) (*GameLookupResponse, error) {
 	})
 	if err != nil {
 		return nil, errutils.Wrap("c.call", err)
+	}
+
+	if !json.Valid(jsonResp) {
+		return nil, fmt.Errorf("%s", jsonResp)
+	}
+
+	if bytes.Equal(jsonResp, []byte("[]")) {
+		return &GameLookupResponse{}, nil
 	}
 
 	var game GameLookupResponse

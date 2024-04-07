@@ -1,6 +1,7 @@
 package gocheapshark
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -15,6 +16,14 @@ func (c Client) StoreList() (*StoreListResponse, error) {
 	})
 	if err != nil {
 		return nil, errutils.Wrap("c.call", err)
+	}
+
+	if !json.Valid(jsonResp) {
+		return nil, fmt.Errorf("%s", jsonResp)
+	}
+
+	if bytes.Equal(jsonResp, []byte("[]")) {
+		return &StoreListResponse{}, nil
 	}
 
 	var stores []*StoreFetchResponse

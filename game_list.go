@@ -1,6 +1,7 @@
 package gocheapshark
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -24,6 +25,14 @@ func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
 		return nil, errutils.Wrap("c.call", err)
 	}
 
+	if !json.Valid(jsonResp) {
+		return nil, fmt.Errorf("%s", jsonResp)
+	}
+
+	if bytes.Equal(jsonResp, []byte("[]")) {
+		return &GameListResponse{}, nil
+	}
+
 	var games []*GameFetchResponse
 	if err := json.Unmarshal(jsonResp, &games); err != nil {
 		return nil, errutils.Wrap("json.Unmarshal(jsonResp, &games)", err)
@@ -35,7 +44,7 @@ func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
 }
 
 func (opts GameListOpts) validate() error {
-	if opts.Title == "" {
+	if opts.Title == nil {
 		return ErrNoTitle
 	}
 
@@ -43,10 +52,10 @@ func (opts GameListOpts) validate() error {
 }
 
 type GameListOpts struct {
-	Title      string `json:"title"`
-	SteamAppID *uint  `json:"steamAppID"`
-	Limit      *uint  `json:"limit"`
-	Exact      *bool  `json:"exact"`
+	Title      *string `json:"title"`
+	SteamAppID *uint   `json:"steamAppID"`
+	Limit      *uint   `json:"limit"`
+	Exact      *bool   `json:"exact"`
 }
 
 type GameListResponse struct {
