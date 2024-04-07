@@ -63,5 +63,8 @@ alertManage, err := client.AlertManage(gocheapshark.AlertManageOpts{
 })
 ```
 
-NOTE: This follows all the types and payloads available on the [Cheapshark API Docs](https://apidocs.cheapshark.com/), all requests and responses are working, have validations for required fields and error handling from their API.
+NOTES: 
+- Anything that Cheapshark API expects a `string` with comma-separated ids, the client expects a `slice` of strings and this will be parsed accordingly for the query params
+- Anything that Cheapshark API expects `1` or `0` for flag filters, the client expects a `boolean` and this will be parsed accordingly for the query params
+- This follows all the types and payloads available on the [Cheapshark API Docs](https://apidocs.cheapshark.com/), all requests and responses are working, have validations for required fields and error handling from their API.
 Since this is a work in progress, it's not guaranteed it will always return the correct HTTP status code when validations or errors happen.
