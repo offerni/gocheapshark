@@ -1,3 +1,3 @@
 module github.com/offerni/gocheapshark
 
-go 1.19
+go 1.22
