@@ -1,6 +1,6 @@
 # Golang Client for the [Cheapshark API](https://apidocs.cheapshark.com/)
 ## Examples
-### Instantiating a new Client
+### Initializing a new Client
 ```
 client, err := gocheapshark.NewClient(gocheapshark.NewClientOpts{
   BaseUrl: os.Getenv("CHEAPSHARK_API_BASE_URL"),
