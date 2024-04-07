@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/offerni/go-cheap-shark/errutils"
+	"github.com/offerni/gocheapshark/errutils"
 )
 
 func (c Client) GameLookup(opts GameLookupOpts) (*GameLookupResponse, error) {

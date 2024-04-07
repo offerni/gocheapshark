@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/offerni/go-cheap-shark/errutils"
+	"github.com/offerni/gocheapshark/errutils"
 )
 
 func (c Client) AlertEdit(opts AlertEditOpts) (*bool, error) {

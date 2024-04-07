@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/offerni/go-cheap-shark/errutils"
-	"github.com/offerni/go-cheap-shark/utils"
+	"github.com/offerni/gocheapshark/errutils"
+	"github.com/offerni/gocheapshark/utils"
 )
 
 func (c Client) GameLookupMultiple(opts GameLookupMultipleOpts) (*GameLookupMultipleResponse, error) {

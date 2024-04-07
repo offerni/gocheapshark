@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/offerni/go-cheap-shark/errutils"
-	"github.com/offerni/go-cheap-shark/utils"
+	"github.com/offerni/gocheapshark/errutils"
+	"github.com/offerni/gocheapshark/utils"
 )
 
 func (c Client) DealList(opts DealListOpts) (*DealListResponse, error) {
