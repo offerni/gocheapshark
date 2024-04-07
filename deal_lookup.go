@@ -42,7 +42,7 @@ func (opts DealLookupOpts) validate() error {
 }
 
 type DealLookupOpts struct {
-	ID string
+	ID string `json:"id"`
 }
 
 type DealLookupResponse struct {

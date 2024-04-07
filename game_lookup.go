@@ -42,7 +42,7 @@ func (opts GameLookupOpts) validate() error {
 }
 
 type GameLookupOpts struct {
-	ID uint
+	ID uint `json:"id"`
 }
 
 type GameLookupResponse struct {

@@ -36,7 +36,7 @@ func (c Client) GameList(opts GameListOpts) (*GameListResponse, error) {
 
 func (opts GameListOpts) validate() error {
 	if opts.Title == "" {
-		return ErrNoGameTitle
+		return ErrNoTitle
 	}
 
 	return nil
